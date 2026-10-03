@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class frequencyController : MonoBehaviour
 {
+    public frequencyController instace { get; private set;}
+
     [SerializeField] LineRenderer targetWave;
     [SerializeField] LineRenderer playerWave;
 
@@ -17,6 +19,14 @@ public class frequencyController : MonoBehaviour
     // Counts how many times the player has matched the target frequency
     public int completions = 0;
 
+    void Awake()
+    {
+        if(frequencyController.instance == null)
+            instance = this;
+        else 
+            Destroy(gameObject);
+    }
+
     void Start()
     {
         RandomizeTargetFrequency();
@@ -28,6 +38,7 @@ public class frequencyController : MonoBehaviour
         // Updates display of frequency waves
         SetFrequency(targetWave, targetFrequency[0], targetFrequency[1], targetFrequency[2]);
         SetFrequency(playerWave, playerFrequency[0], playerFrequency[1], playerFrequency[2]);
+
     }
 
     // Randomizes the target frequency values
@@ -68,7 +79,7 @@ public class frequencyController : MonoBehaviour
     }
 
     // Averages how accurate the player amplitude, width and offset are to see if they player is close enough to the target frequency to count as a match. If they are close enough, it adds a completion step and randomizes the target frequency.
-    float CheckPlayerAccuracy()
+    public float CheckPlayerAccuracy()
     {
         // Get the accuracy of each variable as a percentage
         float ampAccuracy = Mathf.Abs((playerFrequency[0] - targetFrequency[0]) / targetFrequency[0]) * 100f;
@@ -97,6 +108,9 @@ public class frequencyController : MonoBehaviour
         if(completions >= 3)
         {
             Debug.Log("Win Condition Met");
+
         }
     }
+
+
 }
