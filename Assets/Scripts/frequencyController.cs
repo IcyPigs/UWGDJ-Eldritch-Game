@@ -42,6 +42,8 @@ public class frequencyController : MonoBehaviour
         // Randomize starting target frequency
         RandomizeTargetFrequency();
 
+        completions = 0;
+
         // Set up Patience
         resetPatience();
         decayRate = dayManager.instance.days[dayManager.instance.currentDay].patienceDecayRate; 

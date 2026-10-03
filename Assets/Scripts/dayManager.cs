@@ -46,8 +46,13 @@ public class dayManager : MonoBehaviour
     
     public void StartDay()
     {
+        if(SceneManager.GetActiveScene().name != "UWGDJ")
+            SceneManager.LoadScene("UWGDJ");
+
         // Indicates gameplay has started
         clockOut = false;
+
+        Debug.Log("Day Preset: " + days[dayIndex].name);
 
         // Set Up Gameplay Managers
         dialogueManager.instance.LoadDialogue(days[dayIndex].dialogue);  
@@ -70,6 +75,8 @@ public class dayManager : MonoBehaviour
 
         finalCompletions = frequencyController.instance.completions;
         finalPatience = Mathf.Round(frequencyController.instance.patience) / 10;
+        Destroy(dialogueManager.instance);
+        Destroy(frequencyController.instance);
 
         if(finalPatience < 0f)
             finalPatience = 0;

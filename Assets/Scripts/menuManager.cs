@@ -46,7 +46,7 @@ public class menuManager : MonoBehaviour
             startOfIndex += dayManager.instance.dayRanges[i];
         }
 
-        newIndex = Random.Range(startOfIndex - 1, startOfIndex - 1 + dayManager.instance.dayRanges[currentDay]);
+        newIndex = Random.Range(startOfIndex, startOfIndex - 1 + dayManager.instance.dayRanges[currentDay]);
 
         dayManager.instance.SetDayIndex(newIndex);
         SceneManager.LoadScene("UWGDJ");

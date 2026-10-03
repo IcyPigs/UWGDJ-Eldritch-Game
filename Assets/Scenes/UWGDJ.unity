@@ -3564,7 +3564,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::dayManager
   days:
   - {fileID: 11400000, guid: d3e88142a50457a4d9505792a7ffd1c5, type: 2}
-  dayRanges: 0000000000000000000000000000000000000000i
+  - {fileID: 11400000, guid: 64017cd7dce040d46a47de819c87fa91, type: 2}
+  - {fileID: 11400000, guid: e10475a1144d33a4284b67a8dd99c21c, type: 2}
+  - {fileID: 11400000, guid: 5747f9ad3beb63c44b74ef721b96eb9e, type: 2}
+  - {fileID: 11400000, guid: 4c14567e37dde3748800464d8f7dcc23, type: 2}
+  - {fileID: 11400000, guid: 483ac84e7b461a646ae5f3beeb56c833, type: 2}
+  - {fileID: 11400000, guid: 92555169032b271449cb14763f85186d, type: 2}
+  - {fileID: 11400000, guid: 402674c8643130244822d5d8f4c4d0d5, type: 2}
+  - {fileID: 11400000, guid: 4086b7c375b275247b8dd5d9d1c9448f, type: 2}
+  - {fileID: 11400000, guid: 2c8c7912bf6409248a955c73b14b0803, type: 2}
+  dayRanges: 0200000002000000020000000200000002000000i
   completionStatus: 0000000000y
   clockOut: 0
   score: 0
