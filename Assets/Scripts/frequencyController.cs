@@ -1,8 +1,11 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class frequencyController : MonoBehaviour
 {
     public static frequencyController instance { get; private set;}
+
+    public Slider patienceBar; // Reference to patience bar
 
     [SerializeField] LineRenderer targetWave;
     [SerializeField] LineRenderer playerWave;
@@ -16,6 +19,13 @@ public class frequencyController : MonoBehaviour
     // leniencyPercent is how close the player must be to the target frequency
     public float leniencyPercent;
 
+    public float patience; // Tracks the client patience level
+    public float characterLeniency;
+
+    float decayTimer = 0f; // Timer for patience decay
+    float decayRate = 1f; // Rate at which patience decays, referenced by Day[x].patienceDecayRate
+
+
     // Counts how many times the player has matched the target frequency
     public int completions = 0;
 
@@ -27,6 +37,20 @@ public class frequencyController : MonoBehaviour
             Destroy(gameObject);
     }
 
+    public void StartDay()
+    {
+        // Randomize starting target frequency
+        RandomizeTargetFrequency();
+
+        // Set up Patience
+        resetPatience();
+        decayRate = dayManager.instance.days[dayManager.instance.currentDay].patienceDecayRate; 
+        decayTimer = decayRate;
+
+        // Set gameplay variables
+        characterLeniency = dayManager.instance.days[dayManager.instance.currentDay].leniency;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -34,6 +58,27 @@ public class frequencyController : MonoBehaviour
         SetFrequency(targetWave, targetFrequency[0], targetFrequency[1], targetFrequency[2]);
         SetFrequency(playerWave, playerFrequency[0], playerFrequency[1], playerFrequency[2]);
 
+        decayTimer -= Time.deltaTime;
+
+        if(decayTimer <= 0f)
+        {
+            decay();
+            decayTimer = decayRate;
+        }
+    }
+    
+    void resetPatience() {
+        patience = 1000;
+    }
+
+    void decay()
+    {
+        patience -= 10f  * (1f + Mathf.Log(1f + CheckPlayerAccuracy())) / characterLeniency;
+        patienceBar.value = patience;
+        
+        // If patience is 0 or less, end the day with a failure state
+        if(patience <= 0f)
+            dayManager.instance.EndDay(false);
     }
 
     // Randomizes the target frequency values

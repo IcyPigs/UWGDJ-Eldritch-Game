@@ -8,6 +8,9 @@ public class dialogueManager : MonoBehaviour
     [HideInInspector]
     public static dialogueManager instance { get; private set;}
 
+    // Reference to character profile objects
+    public Image[] characterProfiles;
+    
     // Dialogue to be played
     public Dialogue dialogue;
 
