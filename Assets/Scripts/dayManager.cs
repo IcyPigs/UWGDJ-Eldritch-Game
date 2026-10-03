@@ -69,7 +69,7 @@ public class dayManager : MonoBehaviour
         clockOut = true;
 
         finalCompletions = frequencyController.instance.completions;
-        finalPatience = Mathf.Round(frequencyController.instance.patience * 10) / 10;
+        finalPatience = Mathf.Round(frequencyController.instance.patience) / 10;
 
         if(finalPatience < 0f)
             finalPatience = 0;
