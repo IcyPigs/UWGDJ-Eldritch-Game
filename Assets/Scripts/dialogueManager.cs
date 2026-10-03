@@ -6,7 +6,7 @@ public class dialogueManager : MonoBehaviour
 {
     // Make dialogue manager always accessible
     [HideInInspector]
-    public dialogueManager instance { get; private set;}
+    public static dialogueManager instance { get; private set;}
 
     // Dialogue to be played
     public Dialogue dialogue;
@@ -42,9 +42,6 @@ public class dialogueManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
-        // Remove later when another script loads dialogue
-        LoadDialogue(dialogue);
     }
 
     void Update()

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class frequencyController : MonoBehaviour
 {
-    public frequencyController instace { get; private set;}
+    public static frequencyController instance { get; private set;}
 
     [SerializeField] LineRenderer targetWave;
     [SerializeField] LineRenderer playerWave;
@@ -107,8 +107,7 @@ public class frequencyController : MonoBehaviour
         // If the player has completed 3 matches, they win
         if(completions >= 3)
         {
-            Debug.Log("Win Condition Met");
-
+            dayManager.instance.EndDay(true);
         }
     }
 

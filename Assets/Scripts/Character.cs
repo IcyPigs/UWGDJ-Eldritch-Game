@@ -5,5 +5,4 @@ public class Character : ScriptableObject
 {
     public new string name;
     public Sprite profile;
-    public float leniency;
 }
