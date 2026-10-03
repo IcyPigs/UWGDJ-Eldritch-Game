@@ -4,11 +4,13 @@ using UnityEngine;
 public class Dialogue : ScriptableObject
 {
     [SerializeField]
-    public Line lines;
+    public Line[] lines;
+}
 
-    public struct Line{
-        public Character character;
-        public string statement;
-        public float timeToRead;
-    }
+[System.Serializable]
+public struct Line{
+    public Character character;
+    [TextArea(3,10)]
+    public string statement;
+    public float timeToRead;
 }

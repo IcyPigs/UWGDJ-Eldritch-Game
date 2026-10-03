@@ -9,6 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 015c744be6ec3214badee6e33aa0a7dd, type: 3}
-  m_Name: Dialogue
-  m_EditorClassIdentifier: Assembly-CSharp::Dialogue
+  m_Script: {fileID: 11500000, guid: 6bbaf642722288944aa516995148975f, type: 3}
+  m_Name: Character2
+  m_EditorClassIdentifier: Assembly-CSharp::Character
+  name: Circle
+  profile: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  leniency: 10
