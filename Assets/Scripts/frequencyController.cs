@@ -144,6 +144,7 @@ public class frequencyController : MonoBehaviour
         completions++;
         RandomizeTargetFrequency();
         dialogueManager.instance.UpdateDisturbanceLevel(completions);
+        FindAnyObjectByType<audioManager>().Play("Robot Affirm");
         Debug.Log("Completion Step");
 
         // If the player has completed 3 matches, they win
