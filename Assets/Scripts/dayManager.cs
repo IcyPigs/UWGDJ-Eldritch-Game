@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class dayManager : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class dayManager : MonoBehaviour
     [Space]
 
     public Day[] days; // Stores each possible day
+    public int[] dayRanges = new int[5]; // Each value stores how many days are valid for each day
+    // dayRanges[0] is valid mondays, dayRanges[1] is valid tuesdays... so on
     public bool[] completionStatus = new bool[5]; // Tracks if the player has completed each day
     
     [Space]
@@ -15,6 +18,12 @@ public class dayManager : MonoBehaviour
     public bool clockOut; // Indicates if the player is in gameplay
     public int score; // 1-5? for preformance, gets at the end
     public int currentDay; // Track which day the player is on
+    
+    [Space]
+
+    int dayIndex; // Which day from days[] will be called by StartDay()
+    public int finalCompletions; // Used for score card
+    public float finalPatience; // Used for score card
 
     void Awake()
     {
@@ -31,29 +40,39 @@ public class dayManager : MonoBehaviour
 
     void Start()
     {
+        dayIndex = Random.Range(0, dayRanges[0] - 1);
         StartDay();
     }
     
-    void StartDay()
+    public void StartDay()
     {
         // Indicates gameplay has started
         clockOut = false;
 
         // Set Up Gameplay Managers
-        dialogueManager.instance.LoadDialogue(days[currentDay].dialogue);  
+        dialogueManager.instance.LoadDialogue(days[dayIndex].dialogue);  
         dialogueManager.instance.UpdateDisturbanceLevel(0);
 
         // Set up character profiles
-        dialogueManager.instance.characterProfiles[0].sprite = days[currentDay].characters[0].profile;
-        dialogueManager.instance.characterProfiles[1].sprite = days[currentDay].characters[1].profile;
+        dialogueManager.instance.characterProfiles[0].sprite = days[dayIndex].characters[0].profile;
+        dialogueManager.instance.characterProfiles[1].sprite = days[dayIndex].characters[1].profile;
 
         // Set up Patience
         frequencyController.instance.StartDay();
     }
 
+    public void SetDayIndex(int newIndex) { dayIndex = newIndex; }
+    public Day GetCurrentDay() { return days[dayIndex]; }
+
     public void EndDay(bool successState)
     {
         clockOut = true;
+
+        finalCompletions = frequencyController.instance.completions;
+        finalPatience = Mathf.Round(frequencyController.instance.patience * 10) / 10;
+
+        if(finalPatience < 0f)
+            finalPatience = 0;
 
         if(successState)
         {
@@ -67,5 +86,7 @@ public class dayManager : MonoBehaviour
         }
 
         currentDay++;
+
+        SceneManager.LoadScene("Completion");
     }
 }
