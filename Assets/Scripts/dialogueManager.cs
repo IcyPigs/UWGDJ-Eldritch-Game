@@ -22,6 +22,8 @@ public class dialogueManager : MonoBehaviour
     [Header("Disturbance Settings")]
 
     // How connected the call is, causes distrubance to dialogue
+    public int disturbanceLevel = 3;
+    public int[] disturbanceIndex = new int[] {5, 10, 20};
     public float timeBetweenDisturbance = 2f;
     public float connection = 50f;
 
@@ -67,6 +69,16 @@ public class dialogueManager : MonoBehaviour
             timerToDisturb = Random.Range(0, timeBetweenDisturbance);
             statementText.text = DisturbDialogue(currentStatement);
         }
+    }
+
+    public void UpdateDisturbanceLevel(int completions)
+    {
+        disturbanceLevel = 2 - completions;
+        if (completions < 3)
+            connection = 100f - disturbanceIndex[disturbanceLevel];
+        else
+            connection = 100f;
+
     }
 
     // Allows other scripts to load a new dialogue into the dialogue manager

@@ -27,11 +27,6 @@ public class frequencyController : MonoBehaviour
             Destroy(gameObject);
     }
 
-    void Start()
-    {
-        RandomizeTargetFrequency();
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -42,7 +37,7 @@ public class frequencyController : MonoBehaviour
     }
 
     // Randomizes the target frequency values
-    void RandomizeTargetFrequency()
+    public void RandomizeTargetFrequency()
     {
         targetFrequency[0] = Random.Range(0.1f, 1.2f);
         targetFrequency[1] = Random.Range(1f, 5f);
@@ -103,6 +98,8 @@ public class frequencyController : MonoBehaviour
     {
         completions++;
         RandomizeTargetFrequency();
+        dialogueManager.instance.UpdateDisturbanceLevel(completions);
+        Debug.Log("Completion Step");
 
         // If the player has completed 3 matches, they win
         if(completions >= 3)
@@ -110,6 +107,4 @@ public class frequencyController : MonoBehaviour
             dayManager.instance.EndDay(true);
         }
     }
-
-
 }

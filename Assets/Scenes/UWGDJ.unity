@@ -933,7 +933,9 @@ MonoBehaviour:
   profile: {fileID: 1974759517}
   nameText: {fileID: 1994638829}
   statementText: {fileID: 1253794273}
-  timeBetweenDisturbance: 1
+  disturbanceLevel: 3
+  disturbanceIndex: 050000000a00000014000000i
+  timeBetweenDisturbance: 0.2
   connection: 80
 --- !u!1 &430371629
 GameObject:

@@ -41,6 +41,8 @@ public class dayManager : MonoBehaviour
     {
         resetPatience();
         dialogueManager.instance.LoadDialogue(days[currentDay].dialogue);  
+        dialogueManager.instance.UpdateDisturbanceLevel(0);
+        frequencyController.instance.RandomizeTargetFrequency();
 
         decayRate = days[currentDay].patienceDecayRate; 
         decayTimer = decayRate;
